@@ -9,8 +9,8 @@ You will need a copy of [Foundry](https://github.com/foundry-rs/foundry) install
 ### Setup
 
 ```sh
-git clone https://github.com/transmissions11/foundry-template.git
-cd foundry-template
+git clone https://github.com/nicolas-racchi/claim-with-permit.git
+cd claim-with-permit
 forge install
 ```
 
@@ -25,3 +25,7 @@ forge test
 ```sh
 forge snapshot
 ```
+
+### Credits
+
+- This repo was bootstrapped with the [Foundry template](https://github.com/transmissions11/foundry-template) by [t11s](https://github.com/transmissions11).
