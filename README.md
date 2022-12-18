@@ -1,6 +1,6 @@
-# foundry-template • [![CI](https://github.com/transmissions11/foundry-template/actions/workflows/tests.yml/badge.svg)](https://github.com/transmissions11/foundry-template/actions/workflows/tests.yml)
+# Claim with Permit • Digital signature scheme for allow-listed claims
 
-Streamlined template for getting started with Foundry and Solmate.
+Working proof of concept for a digital signature scheme that allows a user to sign a claim with a permit. The permit is a signed message that allows the claim to be signed by the user. The permit is signed by a trusted party, and the claim is executed by the user. The claim is only valid if the permit is valid.
 
 ## Contributing
 
