@@ -1,4 +1,4 @@
-# Claim with Permit • Digital signature scheme for allow-listed claims
+# Claim with Permit • Digital signature scheme for allow-listed token claims
 
 Working proof of concept for a digital signature scheme that allows a user to sign a claim with a permit. The permit is a signed message that allows the claim to be signed by the user. The permit is signed by a trusted party, and the claim is executed by the user. The claim is only valid if the permit is valid.
 

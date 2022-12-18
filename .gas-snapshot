@@ -1,1 +1,6 @@
-ERC20Test:testClaimWithPermit() (gas: 126822)
+ERC20Test:testRevert_ExpiredPermit() (gas: 26604)
+ERC20Test:testRevert_InvalidNonce() (gas: 54260)
+ERC20Test:testRevert_InvalidSignature() (gas: 54311)
+ERC20Test:testRevert_SignatureReplay() (gas: 132443)
+ERC20Test:testRevert_signatureSniff() (gas: 54560)
+ERC20Test:test_SuccessfullyClaimWithPermit() (gas: 126844)
