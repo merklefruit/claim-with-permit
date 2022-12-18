@@ -67,4 +67,47 @@ contract ERC20Test is Test {
         vm.expectRevert(ClaimWithPermit.InvalidSignature.selector);
         claimWithPermit.claim(permit.rewardId, permit.deadline, v, r, s);
     }
+
+    function testRevert_InvalidNonce() public {
+        // use a nonce of 1 instead of 0
+        SigUtils.Permit memory permit = SigUtils.Permit({spender: claimer, rewardId: 1, nonce: 1, deadline: 1 days});
+
+        bytes32 digest = sigUtils.getTypedDataHash(permit);
+
+        (uint8 v, bytes32 r, bytes32 s) = vm.sign(verifierPrivateKey, digest);
+
+        vm.prank(claimer);
+        vm.expectRevert(ClaimWithPermit.InvalidSignature.selector);
+        claimWithPermit.claim(permit.rewardId, permit.deadline, v, r, s);
+    }
+
+    function testRevert_SignatureReplay() public {
+        SigUtils.Permit memory permit = SigUtils.Permit({spender: claimer, rewardId: 1, nonce: 0, deadline: 1 days});
+
+        bytes32 digest = sigUtils.getTypedDataHash(permit);
+
+        (uint8 v, bytes32 r, bytes32 s) = vm.sign(verifierPrivateKey, digest);
+
+        vm.prank(claimer);
+        claimWithPermit.claim(permit.rewardId, permit.deadline, v, r, s);
+
+        // try to claim a second time with the same signed message
+        vm.expectRevert(ClaimWithPermit.InvalidSignature.selector);
+        claimWithPermit.claim(permit.rewardId, permit.deadline, v, r, s);
+    }
+
+    function testRevert_signatureSniff() public {
+        SigUtils.Permit memory permit = SigUtils.Permit({spender: claimer, rewardId: 1, nonce: 0, deadline: 1 days});
+
+        bytes32 digest = sigUtils.getTypedDataHash(permit);
+
+        (uint8 v, bytes32 r, bytes32 s) = vm.sign(verifierPrivateKey, digest);
+
+        // try to claim with a signature that was signed by the verifier but for a different spender
+        address sniffer = vm.addr(uint256(keccak256("sniffer")));
+    
+        vm.prank(sniffer);
+        vm.expectRevert(ClaimWithPermit.InvalidSignature.selector);
+        claimWithPermit.claim(permit.rewardId, permit.deadline, v, r, s);
+    }
 }
