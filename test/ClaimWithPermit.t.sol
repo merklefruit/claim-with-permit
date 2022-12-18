@@ -105,7 +105,7 @@ contract ERC20Test is Test {
 
         // try to claim with a signature that was signed by the verifier but for a different spender
         address sniffer = vm.addr(uint256(keccak256("sniffer")));
-    
+
         vm.prank(sniffer);
         vm.expectRevert(ClaimWithPermit.InvalidSignature.selector);
         claimWithPermit.claim(permit.rewardId, permit.deadline, v, r, s);
