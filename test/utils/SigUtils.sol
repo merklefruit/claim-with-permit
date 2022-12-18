@@ -2,8 +2,8 @@
 pragma solidity 0.8.13;
 
 contract SigUtils {
-    bytes32 internal DOMAIN_SEPARATOR;
-    bytes32 internal PERMIT_TYPEHASH;
+    bytes32 public DOMAIN_SEPARATOR;
+    bytes32 public PERMIT_TYPEHASH;
 
     constructor(bytes32 _DOMAIN_SEPARATOR, bytes32 _PERMIT_TYPEHASH) {
         DOMAIN_SEPARATOR = _DOMAIN_SEPARATOR;
